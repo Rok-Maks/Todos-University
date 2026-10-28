@@ -3,7 +3,8 @@ const itemCountSpan = document.getElementById('item-count')
 const uncheckedCountSpan = document.getElementById('unchecked-count')
 
 let datastore = {}
-let todos = []
+let todos = JSON.parse(localStorage.getItem("todos")) || []
+console.log(todos, localStorage.getItem("todos"))
 
 datastore.todos = todos
 
@@ -15,6 +16,7 @@ function newTodo() {
   todos.push(new_task)
   //console.log(todos)
   render()
+  updateLocalStore()
 }
 
 
@@ -43,13 +45,19 @@ function deleteTodo(id){
   // todos.find(todo => {return todo.id === id}).pop()
   todos = todos.filter(todo => {return todo.id !== id})
   render()
+  updateLocalStore()
 }
 
 function check(id){
   todos = todos.map(todo => {if (todo.id !== id) return todo; else todo.checked = !todo.checked; return todo})
   // todo.checked = !todo.checked
   render()
+  updateLocalStore()
 }
 
+function updateLocalStore(){
+  localStorage.setItem("todos", JSON.stringify(todos))
+  console.log(localStorage, Object.keys(localStorage))
+}
 
 render()
