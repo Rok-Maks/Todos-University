@@ -4,7 +4,6 @@ const uncheckedCountSpan = document.getElementById('unchecked-count')
 
 let datastore = {}
 let todos = JSON.parse(localStorage.getItem("todos")) || []
-console.log(todos, localStorage.getItem("todos"))
 
 datastore.todos = todos
 
@@ -57,7 +56,6 @@ function check(id){
 
 function updateLocalStore(){
   localStorage.setItem("todos", JSON.stringify(todos))
-  console.log(localStorage, Object.keys(localStorage))
 }
 
 render()
